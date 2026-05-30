@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serena – Acompañamiento para mujeres</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#E8547A;--rose-light:#FBEAF0;--rose-mid:#F4C0D1;
+  --fuchsia:#C2185B;--lavender:#9B59A8;--lavender-light:#F3EEF9;
+  --purple-deep:#6A3D8F;--cream:#FFF8F9;--white:#FFFFFF;
+  --text-dark:#2A1A2E;--text-mid:#5A3D5C;--text-soft:#8B6A8E;
+  --border-light:rgba(196,100,140,0.15);
+  --shadow:0 4px 24px rgba(196,100,140,0.12);
+  --shadow-sm:0 2px 12px rgba(196,100,140,0.08);
+  --r:16px;--r-sm:10px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito Sans',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,248,249,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:60px}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--rose)}
+.nav-links{display:flex;gap:0.5rem;align-items:center}
+.nav-link{background:none;border:none;font-family:'Nunito Sans',sans-serif;font-size:0.875rem;color:var(--text-mid);cursor:pointer;padding:0.4rem 0.8rem;border-radius:20px;transition:all 0.2s}
+.nav-link:hover{background:var(--rose-light);color:var(--rose)}
+.nav-cta{background:var(--rose);color:#fff;border:none;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:0.875rem;padding:0.5rem 1.25rem;border-radius:20px;cursor:pointer;transition:all 0.2s}
+.nav-cta:hover{background:var(--fuchsia)}
+.screen{display:none;min-height:100vh;padding-top:60px}
+.screen.active{display:block}
+/* LANDING */
+.hero{min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 1.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,84,122,0.12) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--rose-light);border:1px solid var(--rose-mid);color:var(--fuchsia);font-size:0.8rem;font-weight:700;padding:0.35rem 1rem;border-radius:20px;margin-bottom:1.5rem}
+h1.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,5vw,3.4rem);color:var(--text-dark);line-height:1.15;max-width:640px;margin-bottom:1.25rem}
+h1.hero-title em{color:var(--rose);font-style:italic}
+p.hero-sub{font-size:1.05rem;color:var(--text-mid);max-width:500px;line-height:1.7;margin-bottom:2.5rem}
+.hero-buttons{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:var(--rose);color:#fff;border:none;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:1rem;padding:0.85rem 2.25rem;border-radius:30px;cursor:pointer;transition:all 0.25s;box-shadow:0 4px 16px rgba(232,84,122,0.35)}
+.btn-primary:hover{background:var(--fuchsia);transform:translateY(-2px)}
+.btn-secondary{background:transparent;color:var(--rose);border:2px solid var(--rose);font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:1rem;padding:0.82rem 2.25rem;border-radius:30px;cursor:pointer;transition:all 0.25s}
+.btn-secondary:hover{background:var(--rose-light)}
+.hero-pills{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;margin-top:3rem}
+.pill{background:#fff;border:1px solid var(--border-light);color:var(--text-mid);font-size:0.82rem;padding:0.4rem 0.9rem;border-radius:20px;display:flex;align-items:center;gap:0.35rem;box-shadow:var(--shadow-sm)}
+/* HERO VALIDATED BAR */
+.hero-validated{display:flex;align-items:center;gap:1.5rem;background:#fff;border:1.5px solid var(--rose-mid);border-radius:var(--r);padding:1rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow-sm);flex-wrap:wrap;justify-content:center}
+.hero-val-item{display:flex;align-items:center;gap:0.75rem}
+.hero-val-icon{font-size:1.6rem}
+.hero-val-item div{display:flex;flex-direction:column}
+.hero-val-item strong{font-size:0.9rem;color:var(--text-dark)}
+.hero-val-item span{font-size:0.75rem;color:var(--text-soft)}
+.hero-val-divider{width:1px;height:36px;background:var(--rose-mid)}
+/* TRUST */
+.trust-section{background:#fff;padding:4rem 1.5rem;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
+.section-label{text-align:center;font-size:0.78rem;font-weight:700;letter-spacing:0.1em;color:var(--rose);text-transform:uppercase;margin-bottom:0.75rem}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(1.5rem,3vw,2.1rem);color:var(--text-dark);text-align:center;margin-bottom:1rem}
+.section-sub{text-align:center;color:var(--text-mid);max-width:520px;margin:0 auto 2.5rem;line-height:1.7}
+.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;max-width:860px;margin:0 auto}
+.trust-card{background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r);padding:1.5rem;text-align:center;transition:transform 0.2s,box-shadow 0.2s}
+.trust-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.trust-icon{width:52px;height:52px;background:var(--rose-light);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.4rem}
+.trust-card h3{font-size:1rem;font-weight:700;color:var(--text-dark);margin-bottom:0.4rem}
+.trust-card p{font-size:0.85rem;color:var(--text-soft);line-height:1.6}
+.trust-disclaimer{text-align:center;margin-top:2rem;font-size:0.82rem;color:var(--text-soft);background:var(--rose-light);display:inline-block;padding:0.6rem 1.5rem;border-radius:20px;border:1px solid var(--rose-mid)}
+.trust-disclaimer-wrap{text-align:center}
+/* DOCTORS */
+.trust-doctors{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.doctor-card{background:var(--cream);border:1px solid var(--border-light);border-radius:var(--r);padding:1rem 1.5rem;display:flex;align-items:center;gap:0.75rem;min-width:200px}
+.doctor-avatar{font-size:1.75rem}
+.doctor-info{display:flex;flex-direction:column}
+.doctor-info strong{font-size:0.92rem;color:var(--text-dark)}
+.doctor-info span{font-size:0.78rem;color:var(--rose);font-weight:600}
+.trust-source-banner{display:flex;align-items:flex-start;gap:1rem;background:linear-gradient(135deg,var(--lavender-light),#fff);border:1.5px solid rgba(155,89,168,0.2);border-radius:var(--r);padding:1.25rem 1.5rem;max-width:680px;margin:0 auto}
+.trust-source-logo{font-size:2rem;flex-shrink:0;margin-top:0.1rem}
+.trust-source-banner strong{display:block;font-size:1rem;color:var(--purple-deep);margin-bottom:0.35rem}
+.trust-source-banner p{font-size:0.85rem;color:var(--text-mid);line-height:1.6}
+/* HOW */
+.how-section{padding:4rem 1.5rem;max-width:900px;margin:0 auto}
+.steps{display:flex;flex-direction:column;gap:1rem;max-width:600px;margin:2rem auto 0}
+.step{display:flex;align-items:flex-start;gap:1.25rem;background:#fff;border:1px solid var(--border-light);border-radius:var(--r);padding:1.25rem 1.5rem}
+.step-num{width:40px;height:40px;min-width:40px;background:var(--rose);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+.step-text h4{font-weight:700;font-size:0.95rem;color:var(--text-dark);margin-bottom:0.25rem}
+.step-text p{font-size:0.85rem;color:var(--text-soft);line-height:1.6}
+/* REGISTER */
+.form-screen{max-width:520px;margin:0 auto;padding:2.5rem 1.5rem}
+.form-header{text-align:center;margin-bottom:2rem}
+.form-header h2{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--text-dark);margin-bottom:0.5rem}
+.form-header p{font-size:0.9rem;color:var(--text-soft)}
+.form-card{background:#fff;border:1px solid var(--border-light);border-radius:var(--r);padding:2rem;box-shadow:var(--shadow-sm)}
+.form-group{margin-bottom:1.25rem}
+label{display:block;font-size:0.85rem;font-weight:700;color:var(--text-mid);margin-bottom:0.4rem}
+input,select,textarea{width:100%;padding:0.75rem 1rem;border:1.5px solid var(--border-light);border-radius:var(--r-sm);font-family:'Nunito Sans',sans-serif;font-size:0.95rem;color:var(--text-dark);background:#fff;transition:border-color 0.2s;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(232,84,122,0.12)}
+textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-full{width:100%;background:var(--rose);color:#fff;border:none;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:1rem;padding:0.9rem;border-radius:30px;cursor:pointer;transition:all 0.25s;box-shadow:0 4px 16px rgba(232,84,122,0.3);margin-top:0.5rem}
+.btn-full:hover{background:var(--fuchsia)}
+.form-note{font-size:0.78rem;color:var(--text-soft);text-align:center;margin-top:1rem;line-height:1.5}
+/* DASHBOARD */
+.dash-wrap{max-width:780px;margin:0 auto;padding:2rem 1.5rem}
+.dash-greeting{margin-bottom:1.5rem}
+.dash-greeting h2{font-family:'DM Serif Display',serif;font-size:1.9rem;color:var(--text-dark)}
+.dash-greeting p{color:var(--text-soft);font-size:0.9rem;margin-top:0.25rem}
+.reminder-card{background:linear-gradient(135deg,var(--rose) 0%,var(--fuchsia) 100%);border-radius:var(--r);padding:1.75rem;color:#fff;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.reminder-card::before{content:'💊';position:absolute;right:1.5rem;top:50%;transform:translateY(-50%);font-size:3.5rem;opacity:0.25}
+.reminder-label{font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.85;margin-bottom:0.5rem}
+.reminder-card h3{font-size:1.3rem;font-weight:700;margin-bottom:1rem}
+.reminder-status{display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem}
+.status-dot{width:10px;height:10px;border-radius:50%;background:#fff;opacity:0.6}
+.status-dot.done{background:#4eff9e;opacity:1;box-shadow:0 0 8px rgba(78,255,158,0.6)}
+.status-text{font-size:0.9rem;opacity:0.9}
+.btn-tome{background:#fff;color:var(--rose);border:none;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:0.95rem;padding:0.7rem 1.75rem;border-radius:30px;cursor:pointer;transition:all 0.2s}
+.btn-tome:hover{background:var(--rose-light)}
+.confirm-msg{display:none;margin-top:0.75rem;font-size:0.88rem;opacity:0.9}
+.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.dash-card{background:#fff;border:1px solid var(--border-light);border-radius:var(--r);padding:1.5rem;cursor:pointer;transition:all 0.2s;text-align:center}
+.dash-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--rose-mid)}
+.dash-card-icon{font-size:2rem;margin-bottom:0.75rem}
+.dash-card h4{font-weight:700;color:var(--text-dark);margin-bottom:0.25rem}
+.dash-card p{font-size:0.82rem;color:var(--text-soft)}
+/* CHAT */
+.chat-wrap{max-width:700px;margin:0 auto;padding:1.5rem;display:flex;flex-direction:column;height:calc(100vh - 60px)}
+.chat-header{background:#fff;border:1px solid var(--border-light);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+.chat-avatar{width:48px;height:48px;background:linear-gradient(135deg,var(--rose),var(--lavender));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.chat-header-info h3{font-weight:700;color:var(--text-dark);font-size:1rem}
+.chat-header-info p{font-size:0.75rem;color:var(--text-soft)}
+.chat-badge{background:var(--rose-light);color:var(--fuchsia);font-size:0.72rem;font-weight:700;padding:0.2rem 0.65rem;border-radius:10px;margin-left:0.5rem;border:1px solid var(--rose-mid)}
+.chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:1rem;padding:0.5rem 0;min-height:0}
+.msg{max-width:85%}
+.msg-bot{align-self:flex-start}
+.msg-user{align-self:flex-end}
+.msg-bubble{padding:0.9rem 1.1rem;border-radius:var(--r);font-size:0.9rem;line-height:1.65}
+.msg-bot .msg-bubble{background:#fff;border:1px solid var(--border-light);color:var(--text-dark);border-bottom-left-radius:4px}
+.msg-user .msg-bubble{background:var(--rose);color:#fff;border-bottom-right-radius:4px}
+.msg-name{font-size:0.73rem;color:var(--text-soft);margin-bottom:0.25rem;font-weight:600}
+.msg-user .msg-name{text-align:right}
+.quick-wrap{margin-top:0.75rem}
+.quick-label{font-size:0.78rem;color:var(--text-soft);margin-bottom:0.5rem;font-weight:600}
+.quick-grid{display:flex;flex-direction:column;gap:0.5rem}
+.quick-btn{background:#fff;border:1.5px solid var(--border-light);border-radius:var(--r-sm);padding:0.65rem 1rem;font-family:'Nunito Sans',sans-serif;font-size:0.85rem;color:var(--text-mid);cursor:pointer;text-align:left;transition:all 0.18s;line-height:1.4}
+.quick-btn:hover{border-color:var(--rose);color:var(--rose);background:var(--rose-light)}
+.chat-input-area{margin-top:1rem;display:flex;gap:0.75rem}
+.chat-input{flex:1;padding:0.75rem 1rem;border:1.5px solid var(--border-light);border-radius:30px;font-family:'Nunito Sans',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s}
+.chat-input:focus{border-color:var(--rose)}
+.chat-send{background:var(--rose);border:none;color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:1.1rem;transition:background 0.2s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.chat-send:hover{background:var(--fuchsia)}
+.chat-send:disabled{opacity:0.5;cursor:not-allowed}
+.typing-dots{display:inline-flex;gap:4px;align-items:center;padding:4px 0}
+.typing-dots span{width:7px;height:7px;background:var(--rose-mid);border-radius:50%;animation:bounce 1.2s infinite}
+.typing-dots span:nth-child(2){animation-delay:0.2s}
+.typing-dots span:nth-child(3){animation-delay:0.4s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.msg{animation:fadein 0.3s}
+/* APPOINTMENT MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(42,26,46,0.55);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal-box{background:#fff;border-radius:var(--r);padding:2rem;max-width:480px;width:100%;box-shadow:0 8px 40px rgba(42,26,46,0.25);position:relative;animation:fadein 0.25s}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text-soft);line-height:1}
+.modal-close:hover{color:var(--rose)}
+.modal-title{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--text-dark);margin-bottom:0.4rem}
+.modal-sub{font-size:0.85rem;color:var(--text-soft);margin-bottom:1.5rem;line-height:1.5}
+.doctor-option{display:flex;align-items:center;gap:1rem;background:var(--cream);border:1.5px solid var(--border-light);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:0.75rem;transition:border-color 0.18s,box-shadow 0.18s}
+.doctor-option:hover{border-color:var(--rose-mid);box-shadow:var(--shadow-sm)}
+.doctor-option-avatar{width:44px;height:44px;border-radius:50%;background:var(--rose-light);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.doctor-option-info{flex:1}
+.doctor-option-info strong{display:block;font-size:0.95rem;color:var(--text-dark)}
+.doctor-option-info span{font-size:0.8rem;color:var(--text-soft)}
+.doctor-option-info .doc-phone{display:block;font-size:0.88rem;color:var(--rose);font-weight:700;margin-top:0.2rem}
+.btn-call{background:var(--rose);color:#fff;border:none;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:0.82rem;padding:0.5rem 1rem;border-radius:20px;cursor:pointer;transition:all 0.18s;white-space:nowrap}
+.btn-call:hover{background:var(--fuchsia)}
+.modal-disclaimer{font-size:0.75rem;color:var(--text-soft);text-align:center;margin-top:1rem;line-height:1.5}
+/* BACK TO MENU BUTTON */
+.btn-menu{display:inline-flex;align-items:center;gap:0.4rem;background:var(--rose-light);border:1.5px solid var(--rose-mid);color:var(--fuchsia);font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:0.8rem;padding:0.45rem 1rem;border-radius:20px;cursor:pointer;transition:all 0.18s;margin-bottom:0.5rem}
+.btn-menu:hover{background:var(--rose);color:#fff;border-color:var(--rose)}
+.chat-toolbar{display:flex;align-items:center;gap:0.75rem;padding:0.5rem 0 0.25rem;border-top:1px solid var(--border-light);margin-top:0.5rem}
+/* COMMUNITY */
+.comm-wrap{max-width:720px;margin:0 auto;padding:2rem 1.5rem}
+.comm-header{text-align:center;margin-bottom:2rem}
+.comm-header h2{font-family:'DM Serif Display',serif;font-size:1.9rem;color:var(--text-dark);margin-bottom:0.4rem}
+.comm-header p{font-size:0.9rem;color:var(--text-soft)}
+.comm-rules{background:#fff;border:1px solid var(--border-light);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1rem}
+.comm-rules h4{font-weight:700;font-size:0.9rem;color:var(--text-dark);margin-bottom:0.75rem}
+.rules-list{display:flex;flex-wrap:wrap;gap:0.5rem}
+.rule-tag{background:var(--rose-light);color:var(--fuchsia);font-size:0.78rem;padding:0.3rem 0.75rem;border-radius:20px;border:1px solid var(--rose-mid)}
+.comm-disclaimer{background:var(--lavender-light);border:1px solid rgba(155,89,168,0.2);border-radius:var(--r-sm);padding:0.75rem 1rem;font-size:0.8rem;color:var(--lavender);margin-bottom:1.25rem;text-align:center}
+.publish-box{background:#fff;border:1.5px solid var(--rose-mid);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}
+.publish-box h4{font-weight:700;font-size:0.9rem;color:var(--text-dark);margin-bottom:0.75rem}
+.publish-name-input{width:100%;padding:0.6rem 0.9rem;border:1.5px solid var(--border-light);border-radius:var(--r-sm);font-family:'Nunito Sans',sans-serif;font-size:0.88rem;color:var(--text-dark);outline:none;transition:border-color 0.2s;margin-bottom:0.75rem}
+.publish-name-input:focus{border-color:var(--rose)}
+.publish-textarea{width:100%;min-height:90px;padding:0.75rem 1rem;border:1.5px solid var(--border-light);border-radius:var(--r-sm);font-family:'Nunito Sans',sans-serif;font-size:0.9rem;color:var(--text-dark);resize:vertical;outline:none;transition:border-color 0.2s;margin-bottom:0.75rem;display:block}
+.publish-textarea:focus{border-color:var(--rose)}
+.publish-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem}
+.publish-char{font-size:0.75rem;color:var(--text-soft)}
+.publish-char.warn{color:var(--rose)}
+.btn-publish{background:var(--rose);color:#fff;border:none;font-family:'Nunito Sans',sans-serif;font-weight:700;font-size:0.88rem;padding:0.6rem 1.5rem;border-radius:20px;cursor:pointer;transition:all 0.2s}
+.btn-publish:hover{background:var(--fuchsia)}
+.btn-publish:disabled{opacity:0.5;cursor:not-allowed}
+.publish-warn{font-size:0.75rem;color:var(--text-soft);margin-top:0.75rem;line-height:1.5}
+.comm-section-label{font-size:0.78rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-soft);margin-bottom:0.75rem}
+.comm-messages{display:flex;flex-direction:column;gap:1rem}
+.comm-msg{background:#fff;border:1px solid var(--border-light);border-radius:var(--r);padding:1.25rem 1.5rem}
+.comm-msg.user-post{border-left:3px solid var(--rose-mid);animation:fadein 0.4s}
+.comm-msg-head{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem}
+.comm-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700;flex-shrink:0}
+.comm-msg-meta{flex:1}
+.comm-msg-meta strong{font-size:0.88rem;color:var(--text-dark);display:block}
+.comm-msg-meta span{font-size:0.75rem;color:var(--text-soft)}
+.comm-msg p{font-size:0.9rem;color:var(--text-mid);line-height:1.65}
+.comm-tag{font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:10px;margin-left:0.5rem}
+.tag-anuncio{background:var(--rose-light);color:var(--fuchsia);border:1px solid var(--rose-mid)}
+.tag-consejo{background:#e8f4fd;color:#1565C0;border:1px solid #bee3f8}
+.tag-apoyo{background:var(--lavender-light);color:var(--lavender);border:1px solid rgba(155,89,168,0.2)}
+.comm-msg-actions{display:flex;gap:0.5rem;margin-top:0.75rem}
+.btn-like{background:none;border:1.5px solid var(--border-light);border-radius:20px;font-family:'Nunito Sans',sans-serif;font-size:0.78rem;color:var(--text-soft);padding:0.3rem 0.75rem;cursor:pointer;transition:all 0.18s}
+.btn-like:hover,.btn-like.liked{border-color:var(--rose);color:var(--rose);background:var(--rose-light)}
+.comm-empty{text-align:center;padding:2rem;color:var(--text-soft);font-size:0.88rem;background:#fff;border:1px dashed var(--border-light);border-radius:var(--r)}
+/* FOOTER */
+footer{background:var(--text-dark);color:#fff;padding:3rem 1.5rem 2rem}
+.footer-inner{max-width:900px;margin:0 auto}
+.footer-logo{font-family:'DM Serif Display',serif;font-size:1.75rem;color:var(--rose);margin-bottom:0.5rem}
+.footer-tagline{font-size:0.85rem;color:rgba(255,255,255,0.5);margin-bottom:2rem}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;margin-bottom:2rem}
+.footer-col h5{font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.75rem}
+.footer-col span{display:block;font-size:0.88rem;color:rgba(255,255,255,0.65);margin-bottom:0.4rem;cursor:pointer}
+.footer-col span:hover{color:var(--rose)}
+.footer-medical{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-sm);padding:1rem 1.25rem;font-size:0.8rem;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:1.5rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+.footer-bottom span{font-size:0.8rem;color:rgba(255,255,255,0.3)}
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}
+  .nav-links .nav-link:not(.nav-cta){display:none}
+  .chat-wrap{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Serena</div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="showScreen('landing')">Inicio</button>
+    <button class="nav-link" onclick="showScreen('dashboard')">Mi Panel</button>
+    <button class="nav-link" onclick="showScreen('chat-screen')">Chat</button>
+    <button class="nav-link" onclick="showScreen('community')">Comunidad</button>
+    <button class="nav-cta" onclick="showScreen('register')">Comenzar</button>
+  </div>
+</nav>
+
+<!-- LANDING -->
+<div id="landing" class="screen active">
+  <section class="hero">
+    <div class="hero-badge"><span>💊</span> Para mujeres que usan pastillas anticonceptivas</div>
+    <h1 class="hero-title">Información segura para <em>entender tu método</em></h1>
+    <p class="hero-sub">Acompañamiento digital para mujeres que usan pastillas anticonceptivas, con información <strong>validada por ginecólogos</strong> y basada en <strong>MedlinePlus</strong>.</p>
+    <div class="hero-validated">
+      <div class="hero-val-item"><span class="hero-val-icon">👩‍⚕️</span><div><strong>Validado por ginecólogos</strong><span>Dra. Scarpeta · Dra. Solórzano · Dr. Paredes</span></div></div>
+      <div class="hero-val-divider"></div>
+      <div class="hero-val-item"><span class="hero-val-icon">📋</span><div><strong>Basado en MedlinePlus</strong><span>Fuente médica de referencia internacional</span></div></div>
+    </div>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="showScreen('register')">Comenzar</button>
+      <button class="btn-secondary" onclick="showScreen('dashboard')">Ya tengo cuenta</button>
+    </div>
+    <div class="hero-pills">
+      <div class="pill">💬 Chat 24/7</div>
+      <div class="pill">⏰ Recordatorios diarios</div>
+      <div class="pill">👩‍⚕️ Info validada por ginecólogos</div>
+      <div class="pill">📋 Basado en MedlinePlus</div>
+      <div class="pill">🤝 Comunidad de mujeres</div>
+    </div>
+  </section>
+
+  <section class="trust-section">
+    <p class="section-label">Respaldo médico</p>
+    <h2 class="section-title">Información validada por ginecólogos y MedlinePlus</h2>
+    <p class="section-sub">Todo el contenido de Serena es revisado por especialistas y basado en fuentes médicas de referencia internacional.</p>
+    <div class="trust-doctors">
+      <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><strong>Dra. Claudia Scarpeta</strong><span>Ginecóloga</span></div></div>
+      <div class="doctor-card"><div class="doctor-avatar">👩‍⚕️</div><div class="doctor-info"><strong>Dra. Diana Solórzano</strong><span>Ginecóloga</span></div></div>
+      <div class="doctor-card"><div class="doctor-avatar">👨‍⚕️</div><div class="doctor-info"><strong>Dr. Ricardo Paredes</strong><span>Ginecólogo</span></div></div>
+    </div>
+    <div class="trust-source-banner">
+      <span class="trust-source-logo">📋</span>
+      <div><strong>Basado en MedlinePlus</strong><p>MedlinePlus es un servicio de la Biblioteca Nacional de Medicina de EE.UU., considerada una de las fuentes más confiables de información médica en español.</p></div>
+    </div>
+    <div class="trust-grid" style="margin-top:1.5rem">
+      <div class="trust-card"><div class="trust-icon">🔄</div><h3>Contenido actualizado</h3><p>Revisamos periódicamente la información para mantenerla al día con las recomendaciones médicas vigentes.</p></div>
+      <div class="trust-card"><div class="trust-icon">💬</div><h3>Lenguaje claro</h3><p>Explicamos todo en términos sencillos, sin tecnicismos innecesarios, para que puedas entender tu método.</p></div>
+      <div class="trust-card"><div class="trust-icon">🔒</div><h3>Tu privacidad primero</h3><p>Tu información es privada y nunca se comparte sin tu consentimiento.</p></div>
+    </div>
+    <div class="trust-disclaimer-wrap"><p class="trust-disclaimer">⚠️ La información es educativa y no reemplaza una consulta médica profesional.</p></div>
+  </section>
+
+  <section class="how-section">
+    <p class="section-label">Cómo funciona</p>
+    <h2 class="section-title" style="text-align:center;margin-bottom:0.5rem">Simple, claro y a tu ritmo</h2>
+    <p class="section-sub">Serena se adapta a tu rutina para que usar tu método anticonceptivo sea más fácil y seguro.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-text"><h4>Crea tu cuenta</h4><p>Registra tu nombre, edad y los datos de tu pastilla en pocos minutos.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><h4>Registra tu pastilla y horario</h4><p>Dinos qué pastilla usas y a qué hora la tomas para personalizar tu experiencia.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><h4>Recibe recordatorios</h4><p>Te avisamos cada día a tu hora para que nunca olvides tu toma.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><h4>Consulta el chat cuando tengas dudas</h4><p>Nuestro chat está disponible 24/7 con respuestas validadas por ginecólogos.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><h4>Participa en la comunidad</h4><p>Un espacio seguro de acompañamiento con otras mujeres.</p></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-text"><h4>Usa tu método con más confianza</h4><p>Entiende mejor tu anticonceptivo y toma decisiones informadas.</p></div></div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem"><button class="btn-primary" onclick="showScreen('register')">Empezar ahora</button></div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Serena</div>
+      <div class="footer-tagline">Acompañamiento digital para mujeres que usan pastillas anticonceptivas.</div>
+      <div class="footer-grid">
+        <div class="footer-col"><h5>Producto</h5><span onclick="showScreen('chat-screen')">Chat de apoyo</span><span onclick="showScreen('community')">Comunidad</span><span onclick="showScreen('dashboard')">Recordatorios</span></div>
+        <div class="footer-col"><h5>Legal</h5><span>Política de privacidad</span><span>Términos y condiciones</span><span>Aviso de cookies</span></div>
+        <div class="footer-col"><h5>Contacto</h5><span>hola@serena.app</span><span>Instagram</span></div>
+      </div>
+      <div class="footer-medical">⚕️ Aviso médico: La información presentada en Serena es de carácter educativo y no reemplaza la consulta con un profesional de salud. Ante cualquier duda médica, consulta a tu ginecólogo o médico de confianza.</div>
+      <div class="footer-bottom"><span>© 2025 Serena. Todos los derechos reservados.</span><span>Basado en MedlinePlus</span></div>
+    </div>
+  </footer>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="screen">
+  <div class="form-screen">
+    <div class="form-header"><h2>Bienvenida a Serena 💕</h2><p>Cuéntanos un poco sobre ti para personalizar tu experiencia.</p></div>
+    <div class="form-card">
+      <div class="form-group"><label>Tu nombre</label><input type="text" id="reg-nombre" placeholder="¿Cómo te llamas?" /></div>
+      <div class="form-row">
+        <div class="form-group"><label>Edad</label><input type="number" id="reg-edad" placeholder="Ej: 24" min="15" max="55" /></div>
+        <div class="form-group"><label>Hora de toma</label><input type="time" id="reg-hora" value="20:00" /></div>
+      </div>
+      <div class="form-group"><label>Pastilla anticonceptiva que usas</label>
+        <select id="reg-pastilla"><option value="">Selecciona o escribe...</option><option>Slinda</option><option>Microgynon</option><option>Yasmin</option><option>Diane 35</option><option>Cerazette</option><option>Otra</option></select>
+      </div>
+      <div class="form-group"><label>Fecha en que empezaste a tomarla</label><input type="date" id="reg-fecha" /></div>
+      <div class="form-group"><label>¿Cuál es tu principal duda o necesidad?</label><textarea id="reg-duda" placeholder="Ej: Me olvido seguido de tomarla, o me preocupan los efectos secundarios..."></textarea></div>
+      <button class="btn-full" onclick="guardarRegistro()">Guardar y continuar →</button>
+      <p class="form-note">🔒 Tu información es privada y se usa solo para personalizar tu experiencia en Serena.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="screen">
+  <div class="dash-wrap">
+    <div class="dash-greeting">
+      <h2 id="dash-name">Hola, bienvenida 💕</h2>
+      <p id="dash-date">Hoy es un buen día para cuidarte.</p>
+    </div>
+    <div class="reminder-card">
+      <div class="reminder-label">Recordatorio de hoy</div>
+      <h3 id="dash-reminder">Hoy debes tomar tu pastilla a las 8:00 p.m.</h3>
+      <div class="reminder-status"><div class="status-dot" id="status-dot"></div><span class="status-text" id="status-text">Pendiente</span></div>
+      <button class="btn-tome" id="btn-tome" onclick="registrarToma()">✓ Ya la tomé</button>
+      <p class="confirm-msg" id="confirm-msg">✨ Toma registrada. Nos vemos mañana a la misma hora.</p>
+    </div>
+    <div class="dash-grid">
+      <div class="dash-card" onclick="showScreen('chat-screen')"><div class="dash-card-icon">💬</div><h4>Chat 24/7</h4><p>Resuelve tus dudas con información validada por ginecólogos.</p></div>
+      <div class="dash-card" onclick="showScreen('community')"><div class="dash-card-icon">🤝</div><h4>Comunidad</h4><p>Un espacio seguro de acompañamiento y apoyo.</p></div>
+      <div class="dash-card"><div class="dash-card-icon">⏰</div><h4>Recordatorio</h4><p>Tu recordatorio diario configurado a tu hora.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div id="chat-screen" class="screen">
+  <div class="chat-wrap">
+    <div class="chat-header">
+      <div class="chat-avatar">🌸</div>
+      <div class="chat-header-info">
+        <h3>Serena – Chat de Apoyo <span class="chat-badge">👩‍⚕️ Info validada</span></h3>
+        <p>Validada por <strong>Dra. Claudia Scarpeta · Dra. Diana Solórzano · Dr. Ricardo Paredes</strong> · Basada en MedlinePlus</p>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg msg-bot">
+        <div class="msg-name">Serena</div>
+        <div class="msg-bubble">Hola, estoy aquí para ayudarte. La información que comparto ha sido validada por la <strong>Dra. Claudia Scarpeta</strong>, la <strong>Dra. Diana Solórzano</strong> y el <strong>Dr. Ricardo Paredes</strong>. Recuerda que es orientativa y no reemplaza una consulta médica profesional. ¿Qué necesitas consultar hoy?</div>
+        <div class="quick-wrap" id="initial-quick-wrap">
+          <div class="quick-label">Preguntas frecuentes:</div>
+          <div class="quick-grid" id="quick-options"></div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <input class="chat-input" type="text" id="chat-input" placeholder="Escribe tu pregunta aquí..." />
+      <button class="chat-send" id="chat-send-btn" onclick="enviarMensaje()">↑</button>
+    </div>
+    <div class="chat-toolbar">
+      <button class="btn-menu" onclick="volverAlMenu()">🏠 Menú de preguntas</button>
+      <button class="btn-menu" style="background:var(--lavender-light);border-color:rgba(155,89,168,0.3);color:var(--lavender)" onclick="abrirAgenda()">📅 Agendar cita</button>
+    </div>
+  </div>
+</div>
+
+<!-- COMMUNITY -->
+<div id="community" class="screen">
+  <div class="comm-wrap">
+    <div class="comm-header"><h2>Comunidad Serena 🤝</h2><p>Un espacio seguro de acompañamiento, apoyo y tranquilidad.</p></div>
+    <div class="comm-rules">
+      <h4>Normas de nuestra comunidad:</h4>
+      <div class="rules-list">
+        <span class="rule-tag">💕 Respeto y empatía</span>
+        <span class="rule-tag">🔒 Privacidad garantizada</span>
+        <span class="rule-tag">🚫 Sin juicios</span>
+        <span class="rule-tag">✅ Información verificada</span>
+        <span class="rule-tag">🤝 Sin discriminación</span>
+      </div>
+    </div>
+    <div class="comm-disclaimer">ℹ️ Las experiencias compartidas son personales y no reemplazan la orientación de un profesional de salud.</div>
+
+    <div class="publish-box">
+      <h4>✍️ Comparte con la comunidad</h4>
+      <input type="text" class="publish-name-input" id="pub-name" placeholder="Tu nombre o apodo (ej: María, Anónima...)" maxlength="40" />
+      <textarea class="publish-textarea" id="pub-text" placeholder="Escribe tu experiencia, consejo o mensaje de apoyo..." maxlength="400" oninput="updateChar()"></textarea>
+      <div class="publish-footer">
+        <span class="publish-char" id="pub-char">0 / 400</span>
+        <button class="btn-publish" id="btn-publish" onclick="publicar()">Publicar 💕</button>
+      </div>
+      <p class="publish-warn">⚠️ No compartas información médica como si fuera consejo profesional. Las experiencias personales no reemplazan la consulta con tu ginecóloga.</p>
+    </div>
+
+    <div id="user-posts" style="margin-bottom:1.5rem"></div>
+
+    <div class="comm-section-label">Del equipo Serena</div>
+    <div class="comm-messages">
+      <div class="comm-msg"><div class="comm-msg-head"><div class="comm-avatar" style="background:var(--rose-light);color:var(--rose)">📢</div><div class="comm-msg-meta"><strong>Equipo Serena <span class="comm-tag tag-anuncio">Anuncio</span></strong><span>Hoy · Información general</span></div></div><p>Recordatorio: tomar tu pastilla a la misma hora cada día ayuda a mantener la rutina y la eficacia del método.</p></div>
+      <div class="comm-msg"><div class="comm-msg-head"><div class="comm-avatar" style="background:#e8f4fd;color:#1565C0">💡</div><div class="comm-msg-meta"><strong>Equipo Serena <span class="comm-tag tag-consejo">Consejo</span></strong><span>Ayer · Rutinas de toma</span></div></div><p>¿Se te olvida tomar la pastilla? Asóciala a algo que ya haces a diario, como lavarte los dientes o poner el cargador del celular.</p></div>
+      <div class="comm-msg"><div class="comm-msg-head"><div class="comm-avatar" style="background:var(--lavender-light);color:var(--lavender)">🌸</div><div class="comm-msg-meta"><strong>Equipo Serena <span class="comm-tag tag-apoyo">Apoyo</span></strong><span>Hace 2 días</span></div></div><p>No estás sola. Muchas dudas sobre anticonceptivos son muy comunes y merecen respuestas claras.</p></div>
+      <div class="comm-msg"><div class="comm-msg-head"><div class="comm-avatar" style="background:var(--rose-light);color:var(--rose)">📢</div><div class="comm-msg-meta"><strong>Equipo Serena <span class="comm-tag tag-anuncio">Anuncio</span></strong><span>Hace 3 días</span></div></div><p>Antes de seguir consejos de internet, verifica que vengan de una fuente confiable como MedlinePlus o un profesional de salud.</p></div>
+      <div class="comm-msg"><div class="comm-msg-head"><div class="comm-avatar" style="background:var(--lavender-light);color:var(--lavender)">🌸</div><div class="comm-msg-meta"><strong>Equipo Serena <span class="comm-tag tag-apoyo">Apoyo</span></strong><span>Hace 4 días</span></div></div><p>Recuerda: si tienes síntomas fuertes o algo te preocupa, consúltalo con un profesional de salud.</p></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// =========================================================
+// DATOS
+// =========================================================
+var FAQS = [
+  {
+    q: "Se me olvidó tomar una pastilla Slinda, ¿qué hago?",
+    r: `Tranquila, depende del momento en que la olvidaste.<br><br><b>Primera semana + relaciones en la semana anterior:</b> puede existir riesgo de embarazo. Consulta con tu médico.<br><br><b>Días 8 a 14:</b> tómala apenas recuerdes, aunque sean dos a la vez. Sigue con el horario normal. La protección se mantiene, no necesitas método adicional.<br><br><b>Días 15 a 24:</b> tómala apenas recuerdes. Sigue con las pastillas activas blancas. Al llegar a las pastillas verdes de placebo, no las tomes, bótalas y empieza nueva caja directamente. La protección se mantiene.<br><br><b>Pastilla verde olvidada:</b> no pasa nada, son placebo y no afectan la eficacia.`
+  },
+  {
+    q: "¿Puedo tomar dos pastillas el mismo día si se me olvidó una?",
+    r: `Sí. Las indicaciones del empaque de Slinda dicen que no hay problema en tomar dos pastillas el mismo día para recuperar la olvidada.<br><br>Sin embargo, si olvidaste <b>2 o más pastillas blancas activas</b>, debes usar protección extra (como preservativo) durante los próximos 7 días.`
+  },
+  {
+    q: "¿Qué pasa si tomé tarde una pastilla?",
+    r: `Tómala lo antes posible y sigue con el horario normal.<br><br>Revisa las indicaciones del empaque de Slinda, porque puede haber instrucciones específicas. Si hubo relaciones sexuales sin condón o tienes dudas, consulta con tu médico o farmacéutico para saber si necesitas un método de respaldo.`
+  },
+  {
+    q: "¿Qué efectos secundarios pueden pasar con Slinda?",
+    r: `<b>Frecuentes (1 de cada 10 personas):</b> dolor de cabeza, náuseas, dolor abdominal, cambios en el deseo sexual, cambios de humor, acné, molestias en los senos, menstruaciones dolorosas, sangrado irregular, aumento de peso.<br><br><b>Poco frecuentes (1 de cada 100):</b> anemia, mareos, vómitos, diarrea, estreñimiento, infecciones vaginales, depresión, ansiedad, quistes en los ovarios, sequedad vaginal, caída del pelo, presión alta, sofocos.<br><br><b>Raros (1 de cada 1000):</b> intolerancia a lentes de contacto, pérdida de peso, orina abundante, quistes en el pecho, secreción mamaria, picor genital.<br><br>Si algún síntoma es intenso, no mejora o te preocupa, consulta con tu médico.`
+  },
+  {
+    q: "¿Qué efectos secundarios graves puede generar Slinda?",
+    r: `Los efectos graves son poco comunes, pero pueden incluir cáncer de mama (riesgo muy bajo), trombosis (coágulos de sangre) y trastornos psiquiátricos.<br><br>El riesgo de trombosis puede ser mayor si hay antecedentes familiares de trombosis a edad temprana, obesidad, inmovilización prolongada o cirugía mayor.<br><br>La probabilidad de que ocurran es muy baja en casi todos los casos. Consulta con tu médico si tienes síntomas intensos.`
+  },
+  {
+    q: "¿Cuándo un efecto secundario es señal de alarma?",
+    r: `Un efecto secundario es señal de alarma cuando es fuerte, no mejora o aparece con síntomas que pueden indicar algo serio.<br><br>Busca atención médica de inmediato si tienes:<br>• Dolor de cabeza fuerte<br>• Vómito fuerte<br>• Problemas para hablar<br>• Debilidad o adormecimiento de un brazo o pierna<br>• Dolor o presión en el pecho<br>• Latidos irregulares o muy rápidos<br>• Falta de aire<br>• Dolor en una pierna<br>• Pérdida o cambios en la visión<br>• Dolor fuerte de estómago<br>• Piel u ojos amarillos<br>• Dolor en la parte superior derecha del abdomen<br><br>Si el síntoma aparece de repente o afecta la respiración, el pecho, la visión, el habla o una extremidad, <b>no esperes: busca atención de inmediato.</b>`
+  },
+  {
+    q: "Estoy tomando Slinda con otros medicamentos, ¿qué pasa?",
+    r: `Algunos medicamentos pueden bajar la efectividad de Slinda o causar sangrados inesperados. Esto puede ocurrir con tratamientos para:<br>• Epilepsia (primidona, fenitoína, carbamazepina, oxcarbazepina, felbamato, topiramato)<br>• Tuberculosis (rifampicina)<br>• VIH (ritonavir, nelfinavir, nevirapina, efavirenz)<br>• Hepatitis C (boceprevir, telaprevir)<br>• Hongos (fluconazol, itraconazol, ketoconazol)<br>• Bacterias (claritromicina, eritromicina)<br>• Depresión o productos naturales como la hierba de San Juan<br>• Problemas del corazón (diltiazem)<br><br>Si el medicamento es por poco tiempo, usa preservativo (puede ser necesario hasta 28 días después de suspenderlo). Si es por largo tiempo, tu médico puede recomendarte otro método. Consulta siempre antes de combinar medicamentos.`
+  },
+  {
+    q: "¿Cuándo debo contactar a un médico de inmediato?",
+    r: `Busca atención médica si presentas:<br>• Dolor intenso o hinchazón en una pierna<br>• Dolor en el pecho sin explicación<br>• Dificultad para respirar o tos con sangre<br>• Dolor intenso en el estómago o abdomen bajo<br>• Piel u ojos amarillos u orina negra<br>• Si vas a operarte o estarás inmovilizada<br>• Sangrado vaginal inusual e intenso<br>• Sospecha de embarazo`
+  },
+  {
+    q: "¿Cómo debo tomar Slinda?",
+    r: `Debes tomar una pastilla todos los días a la misma hora. El intervalo entre una pastilla y la siguiente debe ser siempre de 24 horas. La consistencia en el horario es clave para su eficacia.`
+  },
+  {
+    q: "¿Cuándo no debo tomar Slinda?",
+    r: `No debes tomar Slinda si eres alérgica a la drospirenona, tienes coágulos de sangre, enfermedad hepática activa con función no normal, insuficiencia renal, cáncer sensible a hormonas (como cáncer de mama), sangrado vaginal inexplicable, embarazo o sospecha de embarazo.<br><br>Consulta con tu médico si tienes factores de riesgo para coágulos, como antecedentes familiares.`
+  },
+  {
+    q: "¿Cómo puedo empezar a tomar Slinda?",
+    r: `Si no venías tomando ningún otro anticonceptivo, empieza Slinda el <b>primer día de tu periodo</b>.<br><br>Si cambias desde otra pastilla, empieza cuando se acaben las pastillas activas del método anterior, sin tomar las placebo.<br><br>Si vienes de un anillo o parche, empieza Slinda el mismo día en que te lo retiren.`
+  },
+  {
+    q: "¿Desde cuándo estoy protegida frente al embarazo?",
+    r: `La protección depende de cuándo empezaste a tomar Slinda y de si la has tomado correctamente todos los días.<br><br>Si empezaste como te indicó tu médico y no has olvidado pastillas, estás protegida. Pero si empezaste en otro momento, olvidaste pastillas, las tomaste tarde, vomitaste o tuviste diarrea, revisa el empaque y usa condón como respaldo si así lo indica.`
+  },
+  {
+    q: "¿Necesito usar preservativo los primeros días?",
+    r: `Sí. Si estás empezando Slinda y no estás segura de si ya estás protegida, usa preservativo durante los primeros 7 días y sigue las instrucciones del empaque o de tu médico.`
+  },
+  {
+    q: "¿Qué hago si quiero dejar de tomar Slinda?",
+    r: `Puedes dejarla cuando quieras. Pero desde ese día ya no estarás protegida frente al embarazo.<br><br>Si no deseas quedar embarazada, usa otro método anticonceptivo. No la suspendas por tu cuenta sin hablar con tu médico, ya que te puede quedar sin protección. Agenda una consulta para planear el cambio.`
+  },
+  {
+    q: "¿Qué hago si llevo varios días con diarrea o vómito?",
+    r: `Esta situación es similar a cuando se olvida una pastilla: el activo puede no haberse absorbido bien. Usa un método anticonceptivo adicional como preservativo.<br><br>MedlinePlus indica que debes llamar al médico si el vómito o diarrea dura más de 1 día mientras tomas las pastillas activas, para saber cuánto tiempo necesitas usar método de respaldo.`
+  },
+  {
+    q: "¿Es normal tener sangrado entre periodos?",
+    r: `Sí, puede ser normal tener manchado o sangrado entre periodos, especialmente mientras el cuerpo se adapta a Slinda.<br><br>Pero si el sangrado es muy abundante, dura mucho tiempo, no mejora o te preocupa, debes consultar con un médico.`
+  },
+  {
+    q: "¿Es normal que no me llegue el periodo tomando las pastillas?",
+    r: `Sí, puede ser normal que no llegue el periodo mientras tomas Slinda.<br><br>Pero si olvidaste pastillas, las tomaste tarde, tuviste vómito o diarrea, o tuviste relaciones sin método de respaldo cuando correspondía, es mejor hacer una prueba de embarazo o consultar con tu médico.`
+  },
+  {
+    q: "¿Las pastillas anticonceptivas engordan?",
+    r: `Slinda puede causar aumento de peso en algunas personas, pero no necesariamente engorda a todas. Cada cuerpo reacciona diferente.<br><br>Si notas un aumento de peso fuerte, rápido o que te preocupa, lo mejor es consultarlo con tu médico para revisar si puede estar relacionado con la pastilla u otra causa.`
+  },
+  {
+    q: "¿Las pastillas pueden afectar mi estado de ánimo?",
+    r: `Sí, las pastillas pueden afectar el estado de ánimo en algunas personas.<br><br>Si notas tristeza intensa, cambios de ánimo fuertes, cansancio extremo o problemas para dormir, no lo ignores. Habla con tu médico para revisar si Slinda puede estar influyendo y si necesitas cambiar el método.`
+  },
+  {
+    q: "¿Las pastillas anticonceptivas causan infertilidad?",
+    r: `No. Slinda es un método anticonceptivo: ayuda a prevenir el embarazo mientras lo estás usando, pero no causa infertilidad.<br><br>Si después de suspenderla tienes dificultad para quedar embarazada o no vuelve tu periodo, lo mejor es consultar con ginecología para revisar otras posibles causas.`
+  },
+  {
+    q: "¿Puedo tomar alcohol mientras uso Slinda?",
+    r: `El alcohol en sí no cancela la protección de Slinda. Sin embargo, si el alcohol hace que olvides tomar la pastilla, la tomes tarde, vomites o tengas diarrea, la protección puede disminuir.<br><br>Toma tu pastilla siempre a la misma hora, independientemente de si consumiste alcohol.`
+  },
+  {
+    q: "¿Qué diferencia hay entre pastilla activa y placebo?",
+    r: `La pastilla <b>activa</b> es la que contiene la hormona y protege contra el embarazo.<br><br>La pastilla <b>placebo</b> no tiene hormona; está en el empaque para que no pierdas la rutina y empieces el siguiente paquete a tiempo. Si olvidas una placebo, no afecta la eficacia anticonceptiva.`
+  },
+  {
+    q: "¿Qué pasa si me tomé una pastilla placebo por error?",
+    r: `Si tomaste una placebo cuando te tocaba una activa, toma la pastilla activa que correspondía lo antes posible y sigue el empaque en orden.<br><br>Usa preservativo como respaldo si el empaque lo indica.`
+  },
+  {
+    q: "¿Qué hago si perdí una pastilla activa?",
+    r: `Toma la siguiente pastilla activa según el orden del empaque y consulta las instrucciones del blíster o llama a tu médico o farmacéutico.<br><br>Si perdiste <b>2 o más pastillas activas blancas</b>, puede que no estés protegida contra el embarazo y puede que necesites preservativo como respaldo durante 7 días.`
+  },
+  {
+    q: "¿Qué hago si quiero cambiar de marca de pastilla?",
+    r: `Agenda una consulta o habla con tu médico antes de hacer el cambio. No la suspendas por tu cuenta, porque podrías quedar sin protección frente al embarazo.<br><br>Mientras haces el cambio, sigue tomando Slinda como indica el empaque hasta que te indiquen cómo pasar al nuevo método.`
+  },
+  {
+    q: "¿La pastilla protege contra infecciones de transmisión sexual?",
+    r: `No. Slinda <b>no protege contra infecciones de transmisión sexual (ITS)</b>. Para reducir el riesgo de ITS, debes usar preservativo.`
+  },
+  {
+    q: "¿Cuándo debería pedir una cita con mi ginecóloga?",
+    r: `Deberías pedir cita si:<br>• Quieres empezar, cambiar o suspender Slinda<br>• Olvidaste 2 o más pastillas blancas activas<br>• Tuviste vómito o diarrea por más de 1 día mientras tomabas las activas<br>• No te llegó el periodo y no tomaste las pastillas correctamente<br>• Tomaste todo bien pero no te llegaron dos periodos seguidos<br>• Tienes efectos secundarios fuertes o que no se van (náuseas, acné, sangrado irregular, dolor de cabeza, cambios de ánimo, aumento de peso)<br>• Aparece cualquier señal de alarma como dolor fuerte de cabeza, presión en el pecho, falta de aire, dolor en una pierna, cambios en la visión, piel u ojos amarillos o sangrado muy abundante<br><br>Ante cualquier señal de alarma, busca atención médica de inmediato.`
+  },
+  {
+    q: "¿Qué hago si sospecho que estoy embarazada?",
+    r: `Hazte una prueba de embarazo y contacta a tu ginecóloga lo antes posible.<br><br>Mientras resuelves la duda, usa preservativo como respaldo. No ignores síntomas como náuseas, vómito o sensibilidad en los senos si sospechas embarazo.`
+  }
+];
+
+var SISTEMA = `Eres Serena, una asistente digital de acompañamiento para mujeres que usan pastillas anticonceptivas. Respondes con lenguaje cálido, claro, tranquilo y responsable. Nunca alarmas innecesariamente.
+
+Usa SOLO la siguiente información validada. Si la pregunta no está cubierta, dilo amablemente y recomienda consultar a un médico o ginecóloga.
+
+INFORMACIÓN VALIDADA SOBRE SLINDA (28 preguntas):
+
+1. OLVIDO DE PASTILLA: Primera semana + relaciones previas: riesgo embarazo, consultar médico. Días 8-14: tomar la olvidada de inmediato aunque sean dos; protección se mantiene. Días 15-24: tomar olvidada, seguir con activas blancas, omitir pastillas verdes y empezar nueva caja. Pastilla verde olvidada: no afecta eficacia.
+
+2. DOS PASTILLAS EL MISMO DÍA: Sí se puede para recuperar una olvidada. Si se olvidaron 2 o más activas blancas, usar preservativo 7 días.
+
+3. PASTILLA TOMADA TARDE: Tomarla lo antes posible y seguir horario normal. Si hubo relaciones sin condón, consultar médico o farmacéutico.
+
+4. EFECTOS FRECUENTES (1/10): dolor de cabeza, náuseas, dolor abdominal, cambios libido/humor, acné, molestias senos, menstruaciones dolorosas, sangrado irregular, aumento de peso.
+
+5. EFECTOS POCO FRECUENTES (1/100): anemia, mareos, vómitos, diarrea, estreñimiento, infecciones vaginales, alteración apetito, tumor benigno útero, depresión, ansiedad, quistes ovarios, sequedad vaginal, caída pelo, presión alta, sofocos, hipersensibilidad.
+
+6. EFECTOS RAROS (1/1000): intolerancia lentes contacto, pérdida peso, orina abundante, quistes pecho, secreción mamaria, células cervicales anormales, picor genital.
+
+7. EFECTOS GRAVES (raros): cáncer de mama (riesgo muy bajo), trombosis (mayor riesgo con antecedentes familiares, obesidad, inmovilización, cirugía mayor), trastornos psiquiátricos. Probabilidad muy baja.
+
+8. SEÑALES DE ALARMA - buscar atención inmediata: dolor de cabeza fuerte, vómito fuerte, problemas para hablar, debilidad/adormecimiento brazo o pierna, dolor/presión pecho, latidos irregulares, falta de aire, dolor en pierna, pérdida/cambios visión, dolor fuerte estómago, piel/ojos amarillos, dolor parte superior derecha abdomen.
+
+9. INTERACCIONES: epilepsia (primidona, fenitoína, carbamazepina, oxcarbazepina, felbamato, topiramato), tuberculosis (rifampicina), VIH (ritonavir, nelfinavir, nevirapina, efavirenz), hepatitis C (boceprevir, telaprevir), hongos (fluconazol, itraconazol, ketoconazol, voriconazol), bacterias (claritromicina, eritromicina), hierba de San Juan, diltiazem, bosentán. Temporal: preservativo hasta 28 días después. Permanente: consultar otro método. Slinda puede afectar: ciclosporina (aumenta efecto), lamotrigina (disminuye efecto), diuréticos ahorradores de potasio.
+
+10. CUÁNDO IR AL MÉDICO DE INMEDIATO: dolor/hinchazón pierna, dolor pecho inexplicable, dificultad respirar, tos con sangre, dolor abdominal intenso, piel/ojos amarillos u orina negra, inmovilización/cirugía, sangrado vaginal inusual intenso, sospecha embarazo.
+
+11. CÓMO TOMAR: una pastilla diaria, misma hora, intervalo 24h.
+
+12. CONTRAINDICACIONES: alergia drospirenona, coágulos sangre, enfermedad hepática activa con función no normal, insuficiencia renal, cáncer sensible a hormonas, sangrado vaginal inexplicable, embarazo o sospecha, factores riesgo coágulos (antecedentes familiares).
+
+13. INICIO: sin anticonceptivo previo: primer día del periodo. Desde otra pastilla: al terminar activas (sin tomar placebo). Desde anillo/parche: día de extracción.
+
+14. PROTECCIÓN DESDE CUÁNDO: si se empieza correctamente y no se olvidan pastillas, se está protegida. Si hubo olvidos, tomas tarde, vómito, diarrea o relaciones sin respaldo cuando correspondía, revisar empaque y usar condón.
+
+15. PRESERVATIVO PRIMEROS DÍAS: si no está segura de estar protegida, usar preservativo los primeros 7 días.
+
+16. DEJAR SLINDA: protección termina ese mismo día. No suspender por cuenta propia; agendar cita médica para planear el cambio.
+
+17. DIARREA/VÓMITO VARIOS DÍAS: similar a olvido; usar preservativo. Si dura más de 1 día con pastillas activas, llamar al médico.
+
+18. SANGRADO ENTRE PERIODOS: puede ser normal mientras el cuerpo se adapta. Si es muy abundante, dura mucho, no mejora o preocupa, consultar médico.
+
+19. AUSENCIA DE PERIODO: puede ser normal con Slinda. Si hubo olvidos, tomas tarde, vómito/diarrea o relaciones sin respaldo: hacer prueba de embarazo o consultar médico. Si tomó todo bien pero no llegaron dos periodos seguidos: consultar médico.
+
+20. PESO: puede causar aumento en algunas personas, no en todas. Cada cuerpo es diferente. Si el aumento es fuerte, rápido o preocupante, consultar médico.
+
+21. ESTADO DE ÁNIMO: puede afectar el ánimo en algunas personas. Si hay tristeza intensa, cambios fuertes, cansancio extremo o problemas para dormir, hablar con el médico.
+
+22. INFERTILIDAD: no causa infertilidad. Es un método temporal. Si después de suspenderla hay dificultad para quedar embarazada, consultar ginecología.
+
+23. ALCOHOL: el alcohol en sí no cancela la protección, pero si hace olvidar la pastilla, tomarla tarde, vomitar o tener diarrea, la protección puede disminuir.
+
+24. CAMBIO DE MARCA: agendar cita médica antes de cambiar. No suspender por cuenta propia. Continuar con Slinda hasta recibir indicaciones.
+
+25. PASTILLA ACTIVA vs PLACEBO: la activa tiene la hormona y protege. La placebo no tiene hormona; mantiene la rutina.
+
+26. PLACEBO POR ERROR: tomar la pastilla activa correspondiente lo antes posible y seguir el empaque en orden. Usar preservativo si el empaque lo indica.
+
+27. PASTILLA ACTIVA PERDIDA: tomar la siguiente activa en orden. Si se perdieron 2 o más activas blancas, puede no haber protección y puede necesitarse preservativo 7 días.
+
+28. PROTECCIÓN CONTRA ITS: Slinda NO protege contra infecciones de transmisión sexual. Para eso se debe usar preservativo.
+
+29. CUÁNDO PEDIR CITA CON GINECÓLOGA: al empezar/cambiar/suspender Slinda, olvidar 2+ pastillas, vómito/diarrea más de 1 día, ausencia de periodo, efectos secundarios fuertes o persistentes, o cualquier señal de alarma (esta última: atención inmediata).
+
+30. SOSPECHA DE EMBARAZO: hacer prueba de embarazo y contactar ginecóloga. Usar preservativo mientras se resuelve la duda.
+
+Formato: párrafos cortos, lenguaje sencillo y cálido. Usa negritas para puntos clave. Al final SIEMPRE agrega: "⚕️ Información validada por la Dra. Claudia Scarpeta, la Dra. Diana Solórzano y el Dr. Ricardo Paredes. Esta información es orientativa y no reemplaza una consulta médica profesional."`;
+
+// =========================================================
+// ESTADO
+// =========================================================
+var chatHistory = [];
+var userPosts = [];
+
+// =========================================================
+// UTILIDADES
+// =========================================================
+function esc(t) {
+  return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function timeAgo(ts) {
+  var d = Date.now() - ts, m = Math.floor(d/60000);
+  if (m < 1) return 'Ahora mismo';
+  if (m < 60) return 'Hace ' + m + ' min';
+  var h = Math.floor(m/60);
+  if (h < 24) return 'Hace ' + h + ' h';
+  var days = Math.floor(h/24);
+  return 'Hace ' + days + ' día' + (days > 1 ? 's' : '');
+}
+
+function hashStr(s) {
+  var h = 0;
+  for (var i = 0; i < s.length; i++) h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+var COLORS = [
+  {bg:'#FBEAF0',c:'#C2185B'},{bg:'#F3EEF9',c:'#6A3D8F'},
+  {bg:'#e8f4fd',c:'#1565C0'},{bg:'#e8f5e9',c:'#2E7D32'},
+  {bg:'#fff3e0',c:'#E65100'},{bg:'#fce4ec',c:'#880E4F'}
+];
+
+// =========================================================
+// NAVEGACIÓN
+// =========================================================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'community') renderPosts();
+}
+
+// =========================================================
+// DASHBOARD
+// =========================================================
+function guardarRegistro() {
+  var nombre = document.getElementById('reg-nombre').value.trim();
+  var hora = document.getElementById('reg-hora').value;
+  if (!nombre) { alert('Por favor ingresa tu nombre.'); return; }
+  var parts = hora.split(':');
+  var hh = parseInt(parts[0]), mm = parts[1];
+  var h12 = hh >= 12 ? ((hh === 12 ? 12 : hh - 12) + ':' + mm + ' p.m.') : ((hh === 0 ? 12 : hh) + ':' + mm + ' a.m.');
+  document.getElementById('dash-name').textContent = 'Hola, ' + nombre + ' \uD83D\uDC95';
+  document.getElementById('dash-reminder').textContent = 'Hoy debes tomar tu pastilla a las ' + h12 + '.';
+  showScreen('dashboard');
+}
+
+function registrarToma() {
+  document.getElementById('status-dot').classList.add('done');
+  document.getElementById('status-text').textContent = '¡Tomada hoy!';
+  document.getElementById('btn-tome').style.display = 'none';
+  document.getElementById('confirm-msg').style.display = 'block';
+}
+
+// =========================================================
+// CHAT – HELPERS
+// =========================================================
+function stripHtml(s) { return s.replace(/<[^>]+>/g, ''); }
+
+function formatBotHtml(text) {
+  return text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.*?)\*\*/g,'<b>$1</b>')
+    .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+}
+
+var DISCLAIMER = '⚕️ Información validada por la Dra. Claudia Scarpeta, la Dra. Diana Solórzano y el Dr. Ricardo Paredes. Esta información es orientativa y no reemplaza una consulta médica profesional.';
+var DISCLAIMER_HTML = '<br><br><small style="color:var(--text-soft);font-size:0.78rem">' + DISCLAIMER + '</small>';
+
+function addTyping(msgs) {
+  var d = document.createElement('div');
+  d.className = 'msg msg-bot'; d.id = 'typing-indicator';
+  d.innerHTML = '<div class="msg-name">Serena</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  var t = document.getElementById('typing-indicator'); if (t) t.remove();
+}
+
+function addBotMsg(msgs, html) {
+  var d = document.createElement('div');
+  d.className = 'msg msg-bot';
+  d.innerHTML = '<div class="msg-name">Serena</div><div class="msg-bubble">' + html + DISCLAIMER_HTML + '</div>';
+  msgs.appendChild(d);
+}
+
+function addQuickOptions(msgs) {
+  var qw = document.createElement('div');
+  qw.className = 'quick-wrap';
+  var label = document.createElement('div');
+  label.className = 'quick-label';
+  label.textContent = '¿Otra pregunta?';
+  var grid = document.createElement('div');
+  grid.className = 'quick-grid';
+  fillQuickGrid(grid, false);
+  qw.appendChild(label);
+  qw.appendChild(grid);
+  msgs.appendChild(qw);
+}
+
+function volverAlMenu() {
+  var msgs = document.getElementById('chat-messages');
+  // Ocultar todos los quick-wraps existentes
+  msgs.querySelectorAll('.quick-wrap').forEach(function(q){ q.style.display = 'none'; });
+
+  // Mensaje del bot
+  var bDiv = document.createElement('div');
+  bDiv.className = 'msg msg-bot';
+  bDiv.innerHTML = '<div class="msg-name">Serena</div><div class="msg-bubble">Claro, aquí están todas las preguntas disponibles. ¿Cuál te gustaría consultar?</div>';
+  msgs.appendChild(bDiv);
+
+  // Crear contenedor de preguntas SIN id fijo para evitar duplicados
+  var qw = document.createElement('div');
+  qw.className = 'quick-wrap';
+  var label = document.createElement('div');
+  label.className = 'quick-label';
+  label.textContent = 'Menú de preguntas:';
+  var grid = document.createElement('div');
+  grid.className = 'quick-grid';
+
+  // Insertar TODAS las preguntas directamente en el grid
+  fillQuickGrid(grid, true);
+
+  qw.appendChild(label);
+  qw.appendChild(grid);
+  msgs.appendChild(qw);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function setInputEnabled(enabled) {
+  var inp = document.getElementById('chat-input');
+  var btn = document.getElementById('chat-send-btn');
+  inp.disabled = !enabled;
+  btn.disabled = !enabled;
+  if (enabled) inp.focus();
+}
+
+// =========================================================
+// CHAT – OPCIONES RÁPIDAS
+// =========================================================
+function buildQuickOptions() {
+  // Solo se usa para poblar el id="quick-options" inicial del HTML
+  var container = document.getElementById('quick-options');
+  if (!container) return;
+  fillQuickGrid(container, false);
+}
+
+// Llena un grid con preguntas frecuentes
+// showAll=true muestra las 28, showAll=false muestra 5 + "Ver más"
+function fillQuickGrid(container, showAll) {
+  container.innerHTML = '';
+  var list = showAll ? FAQS : FAQS.slice(0, 5);
+  list.forEach(function(f, i) {
+    var idx = showAll ? i : i; // captura correcta
+    (function(capturedIdx) {
+      var btn = document.createElement('button');
+      btn.className = 'quick-btn';
+      btn.textContent = f.q;
+      btn.onclick = function(){ responderFAQ(capturedIdx); };
+      container.appendChild(btn);
+    })(i);
+  });
+  if (!showAll && FAQS.length > 5) {
+    var more = document.createElement('button');
+    more.className = 'quick-btn';
+    more.textContent = 'Ver más preguntas...';
+    more.onclick = function() { fillQuickGrid(container, true); };
+    container.appendChild(more);
+  }
+}
+
+function responderFAQ(idx) {
+  var msgs = document.getElementById('chat-messages');
+  msgs.querySelectorAll('.quick-wrap').forEach(function(q){ q.style.display = 'none'; });
+
+  // Mensaje de la usuaria
+  var uDiv = document.createElement('div');
+  uDiv.className = 'msg msg-user';
+  uDiv.innerHTML = '<div class="msg-name">Tú</div><div class="msg-bubble">' + esc(FAQS[idx].q) + '</div>';
+  msgs.appendChild(uDiv);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Guardar en historial con texto plano (sin HTML)
+  chatHistory.push({ role: 'user', content: FAQS[idx].q });
+  chatHistory.push({ role: 'assistant', content: stripHtml(FAQS[idx].r) + ' ' + DISCLAIMER });
+
+  // Mostrar respuesta después de un breve delay
+  setTimeout(function() {
+    addBotMsg(msgs, FAQS[idx].r);
+    addQuickOptions(msgs);
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 400);
+}
+
+// =========================================================
+// CHAT – MENSAJE LIBRE CON IA
+// =========================================================
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.activeElement && document.activeElement.id === 'chat-input') {
+    enviarMensaje();
+  }
+});
+
+function enviarMensaje() {
+  var inp = document.getElementById('chat-input');
+  var txt = inp.value.trim();
+  if (!txt || inp.disabled) return;
+
+  var msgs = document.getElementById('chat-messages');
+  msgs.querySelectorAll('.quick-wrap').forEach(function(q){ q.style.display = 'none'; });
+
+  // Mensaje de la usuaria
+  var uDiv = document.createElement('div');
+  uDiv.className = 'msg msg-user';
+  uDiv.innerHTML = '<div class="msg-name">Tú</div><div class="msg-bubble">' + esc(txt) + '</div>';
+  msgs.appendChild(uDiv);
+  inp.value = '';
+  setInputEnabled(false);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  // Indicador de escritura
+  addTyping(msgs);
+
+  // Agregar pregunta al historial
+  chatHistory.push({ role: 'user', content: txt });
+
+  // Asegurarse de que el historial alterne user/assistant correctamente
+  // y no supere 20 mensajes para evitar errores de contexto muy largo
+  var historialLimpio = [];
+  var hist = chatHistory.slice(-20); // máximo 20 mensajes
+  for (var i = 0; i < hist.length; i++) {
+    // Evitar dos mensajes seguidos del mismo rol
+    if (i === 0 || hist[i].role !== hist[i-1].role) {
+      historialLimpio.push({ role: hist[i].role, content: String(hist[i].content) });
+    }
+  }
+  // El último mensaje debe ser del usuario
+  if (!historialLimpio.length || historialLimpio[historialLimpio.length-1].role !== 'user') {
+    historialLimpio.push({ role: 'user', content: txt });
+  }
+
+  fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: SISTEMA,
+      messages: historialLimpio
+    })
+  })
+  .then(function(res) {
+    return res.json().then(function(data) {
+      return { ok: res.ok, data: data };
+    });
+  })
+  .then(function(result) {
+    removeTyping();
+    var respuesta = result.data.content && result.data.content[0] && result.data.content[0].text
+      ? result.data.content[0].text : null;
+    if (!result.ok || !respuesta) {
+      chatHistory.pop();
+      var errMsg = document.createElement('div');
+      errMsg.className = 'msg msg-bot';
+      errMsg.innerHTML = '<div class="msg-name">Serena</div><div class="msg-bubble">Tuve un problema procesando tu pregunta. ¡Inténtalo de nuevo!</div>';
+      msgs.appendChild(errMsg);
+    } else {
+      chatHistory.push({ role: 'assistant', content: respuesta });
+      addBotMsg(msgs, formatBotHtml(respuesta));
+    }
+    addQuickOptions(msgs);
+    msgs.scrollTop = msgs.scrollHeight;
+  })
+  .catch(function() {
+    removeTyping();
+    chatHistory.pop();
+    var errMsg = document.createElement('div');
+    errMsg.className = 'msg msg-bot';
+    errMsg.innerHTML = '<div class="msg-name">Serena</div><div class="msg-bubble">No se pudo conectar. Verifica tu internet e inténtalo de nuevo.</div>';
+    msgs.appendChild(errMsg);
+    addQuickOptions(msgs);
+    msgs.scrollTop = msgs.scrollHeight;
+  })
+  .finally(function() {
+    setInputEnabled(true);
+  });
+}
+
+// =========================================================
+// COMUNIDAD
+// =========================================================
+function updateChar() {
+  var txt = document.getElementById('pub-text').value;
+  var el = document.getElementById('pub-char');
+  el.textContent = txt.length + ' / 400';
+  el.classList.toggle('warn', txt.length > 350);
+}
+
+function publicar() {
+  var nameEl = document.getElementById('pub-name');
+  var textEl = document.getElementById('pub-text');
+  var name = nameEl.value.trim() || 'An\u00F3nima';
+  var text = textEl.value.trim();
+  if (!text) { textEl.focus(); return; }
+  if (text.length < 5) { alert('Tu mensaje es muy corto. \u00A1Cu\u00E9ntanos un poco m\u00E1s!'); return; }
+
+  var btn = document.getElementById('btn-publish');
+  btn.disabled = true;
+  btn.textContent = 'Publicando...';
+
+  var id = Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+  userPosts.unshift({ id: id, name: name, text: text, ts: Date.now(), likes: 0, liked: false });
+
+  nameEl.value = '';
+  textEl.value = '';
+  updateChar();
+  renderPosts();
+
+  var firstPost = document.querySelector('.user-post');
+  if (firstPost) firstPost.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  btn.disabled = false;
+  btn.textContent = 'Publicar \uD83D\uDC95';
+}
+
+function renderPosts() {
+  var container = document.getElementById('user-posts');
+  if (!container) return;
+  if (!userPosts.length) {
+    container.innerHTML = '<div class="comm-empty">A\u00FAn no hay publicaciones. \u00A1S\u00E9 la primera en compartir! \uD83D\uDC95</div>';
+    return;
+  }
+  var label = '<div class="comm-section-label">De la comunidad (' + userPosts.length + ')</div>';
+  var cards = userPosts.map(function(p) {
+    var ci = hashStr(p.name) % COLORS.length;
+    var col = COLORS[ci];
+    var initials = p.name.trim().split(' ').map(function(w){ return w[0]; }).join('').toUpperCase().slice(0,2) || '?';
+    return '<div class="comm-msg user-post" id="post-' + p.id + '">'
+      + '<div class="comm-msg-head">'
+      + '<div class="comm-avatar" style="background:' + col.bg + ';color:' + col.c + '">' + initials + '</div>'
+      + '<div class="comm-msg-meta"><strong>' + esc(p.name) + ' <span class="comm-tag tag-apoyo">Comunidad</span></strong><span>' + timeAgo(p.ts) + '</span></div>'
+      + '</div>'
+      + '<p>' + esc(p.text).replace(/\n/g,'<br>') + '</p>'
+      + '<div class="comm-msg-actions">'
+      + '<button class="btn-like' + (p.liked ? ' liked' : '') + '" onclick="toggleLike(\'' + p.id + '\', this)">'
+      + '\uD83D\uDC95 <span class="like-count">' + p.likes + '</span>'
+      + '</button>'
+      + '</div>'
+      + '</div>';
+  }).join('');
+  container.innerHTML = label + cards;
+}
+
+function toggleLike(id, btn) {
+  var post = userPosts.find(function(p){ return p.id === id; });
+  if (!post) return;
+  post.liked = !post.liked;
+  post.likes = Math.max(0, post.likes + (post.liked ? 1 : -1));
+  btn.classList.toggle('liked', post.liked);
+  btn.querySelector('.like-count').textContent = post.likes;
+}
+
+// =========================================================
+// AGENDA
+// =========================================================
+function abrirAgenda() {
+  document.getElementById('agenda-modal').classList.add('open');
+}
+function cerrarAgenda() {
+  document.getElementById('agenda-modal').classList.remove('open');
+}
+// Cerrar modal al hacer clic fuera
+document.addEventListener('click', function(e) {
+  var modal = document.getElementById('agenda-modal');
+  if (modal && e.target === modal) cerrarAgenda();
+});
+
+// =========================================================
+// INIT
+// =========================================================
+(function init() {
+  var now = new Date();
+  var dias = ['Domingo','Lunes','Martes','Mi\u00E9rcoles','Jueves','Viernes','S\u00E1bado'];
+  var meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var dateEl = document.getElementById('dash-date');
+  if (dateEl) dateEl.textContent = dias[now.getDay()] + ', ' + now.getDate() + ' de ' + meses[now.getMonth()] + ' de ' + now.getFullYear();
+  buildQuickOptions();
+  renderPosts();
+})();
+</script>
+<!-- APPOINTMENT MODAL -->
+<div class="modal-overlay" id="agenda-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarAgenda()">✕</button>
+    <div class="modal-title">📅 Agendar cita</div>
+    <div class="modal-sub">Comunícate directamente con uno de nuestros ginecólogos validadores para agendar tu consulta.</div>
+
+    <div class="doctor-option">
+      <div class="doctor-option-avatar">👩‍⚕️</div>
+      <div class="doctor-option-info">
+        <strong>Dra. Claudia Scarpeta</strong>
+        <span>Ginecóloga · Consulta presencial y virtual</span>
+        <span class="doc-phone">📞 +57 312 845 6701</span>
+      </div>
+      <a href="tel:+573128456701"><button class="btn-call">Llamar</button></a>
+    </div>
+
+    <div class="doctor-option">
+      <div class="doctor-option-avatar">👩‍⚕️</div>
+      <div class="doctor-option-info">
+        <strong>Dra. Diana Solórzano</strong>
+        <span>Ginecóloga · Consulta presencial y virtual</span>
+        <span class="doc-phone">📞 +57 315 273 9084</span>
+      </div>
+      <a href="tel:+573152739084"><button class="btn-call">Llamar</button></a>
+    </div>
+
+    <div class="doctor-option">
+      <div class="doctor-option-avatar">👨‍⚕️</div>
+      <div class="doctor-option-info">
+        <strong>Dr. Ricardo Paredes</strong>
+        <span>Ginecólogo · Consulta presencial y virtual</span>
+        <span class="doc-phone">📞 +57 318 694 2057</span>
+      </div>
+      <a href="tel:+573186942057"><button class="btn-call">Llamar</button></a>
+    </div>
+
+    <p class="modal-disclaimer">⚠️ Los números son de contacto exclusivo para pacientes de Serena. Horario de atención: lunes a viernes 7:00 a.m. – 6:00 p.m.</p>
+  </div>
+</div>
+
+</body>
+</html>
